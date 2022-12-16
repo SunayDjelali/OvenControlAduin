@@ -1,21 +1,28 @@
 //Define variables pins e.t.
-//Define Rotteri encoder set hronometer
-#define TimerCLK    2
-#define TimerDT     3
-#define TimerSW     4
-//Define rottery encoder set temperature
 
 // Module Termocople connection pins (Digital Pins)
-int thermoDO = 8;
-int thermoCS = 9;
-int thermoCLK = 10;
+int thermoDO = 22;
+int thermoCS = 23;
+int thermoSCK = 24;
 int currentTemperature;
 int choisetTemperature;
 
 //Set pin  for relay in arey
 int RelayPins[] = { 2, 3, 4, 5 };
 //set pin for button rottery encoder
-int RottaryPinsButton[] = { 6, 7};
+int InputPinsButton[] = { 6, 7};
+
+//Define Rotteri encoder set hronometer
+#define TimerCLK    8
+#define TimerDT     9
+#define TimerSW     InputPinsButton[0]
+
+//Define rottery encoder set temperature
+#define TemperatureCLK    10
+#define TemperatureDT     11
+#define TemperatureSW     InputPinsButton[1]
+int TemperaturecurrentCLK; 
+int previousCLK; 
 
 //includes
 #include <arduino.h>
@@ -23,7 +30,7 @@ int RottaryPinsButton[] = { 6, 7};
 #include <Countimer.h>
 
 //Code for Termocuple
-MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
+MAX6675 thermocouple(thermoSCK, thermoCS, thermoDO);
 
 //choise what type of timer use from Countimer Class
 Countimer tDown;
@@ -38,7 +45,7 @@ void setup() {
     //INPUT
     for (int i = 0; i < 2; i++)
     {
-      pinMode(RottaryPinsButton[i], INPUT);
+      pinMode(InputPinsButton[i], INPUT);
     }
   delay(500);  // wait for MAX chip to stabilize  
 }
