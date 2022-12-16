@@ -1,4 +1,8 @@
 //Define variables pins e.t.
+//includes
+#include <arduino.h>
+#include <max6675.h>
+#include <Countimer.h>
 
 // Module Termocople connection pins (Digital Pins)
 int thermoDO = 22;
@@ -9,6 +13,7 @@ int choisetTemperature;
 
 //Set pin  for relay in arey
 int RelayPins[] = { 2, 3, 4, 5 };
+
 //set pin for button rottery encoder
 int InputPinsButton[] = { 6, 7};
 
@@ -16,18 +21,15 @@ int InputPinsButton[] = { 6, 7};
 #define TimerCLK    8
 #define TimerDT     9
 #define TimerSW     InputPinsButton[0]
+int TimercurrentCLK; 
+int TimerpreviousCLK; 
 
 //Define rottery encoder set temperature
 #define TemperatureCLK    10
 #define TemperatureDT     11
 #define TemperatureSW     InputPinsButton[1]
 int TemperaturecurrentCLK; 
-int previousCLK; 
-
-//includes
-#include <arduino.h>
-#include <max6675.h>
-#include <Countimer.h>
+int TemperaturepreviousCLK; 
 
 //Code for Termocuple
 MAX6675 thermocouple(thermoSCK, thermoCS, thermoDO);
@@ -37,16 +39,29 @@ Countimer tDown;
 
 void setup() {
     //Setings Here pins mode OUTPUT, INPUTS
-    //OUTPUT
+    //OUTPUT General ordinary
     for (int i = 0; i < 4; i++) {
       pinMode(RelayPins[i], OUTPUT);
       digitalWrite(RelayPins[i], HIGH);
     }
-    //INPUT
+    //INPUT Generaly General ordinary
     for (int i = 0; i < 2; i++)
     {
       pinMode(InputPinsButton[i], INPUT);
     }
+    // Termocuple set pins Mode INPUT
+    pinMode(thermoSCK, INPUT);
+    pinMode(thermoDO,INPUT);
+    pinMode(thermoSCK,INPUT);
+    //rottery encoder Timer set pins Mode INPUT
+    pinMode(TimerCLK,INPUT);
+    pinMode(TimerDT, INPUT);
+    //Rottery Encoder Temperatura set pins Mode INPUT
+    pinMode(TemperatureCLK,INPUT);
+    pinMode(TemperatureDT, INPUT);
+    TimerpreviousCLK = digitalRead(TimerCLK);
+    TemperaturepreviousCLK = digitalRead(TemperatureCLK);
+
   delay(500);  // wait for MAX chip to stabilize  
 }
 
