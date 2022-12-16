@@ -1,5 +1,8 @@
 //Define variables pins e.t.
 //Define Rotteri encoder set hronometer
+#define TimerCLK    2
+#define TimerDT     3
+#define TimerSW     4
 //Define rottery encoder set temperature
 
 // Module Termocople connection pins (Digital Pins)
