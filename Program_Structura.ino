@@ -74,10 +74,9 @@ void loop() {
 
 void funcTimer() {
   //functione when pres furst buttone set time conter down
-  
   tDown.setCounter(00, 10, 00, tDown.COUNT_DOWN , tDownComplete);
-  tDown.run();
-  tDown.start();
+  //tDown.run();
+  //tDown.start();
 }
 
 void funcHeating() {
