@@ -87,6 +87,13 @@ void setup() {
     pinMode(TemperatureDT, INPUT);
     pinMode(TemperatureSW, INPUT);
 
+    Serial.begin(9600);
+    if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+      Serial.println(F("SSD1306 allocation failed"));
+      for (;;)
+        ;
+    }
+    display.clearDisplay();
     //variable = value from pin
     previousTimerCLK = digitalRead(TimerCLK);
     previousTemperatureCLK = digitalRead(TemperatureCLK);
@@ -141,7 +148,7 @@ void loop() {
 
      if (digitalRead(TimerSW) == LOW) {
      CounterTimer = 0;
-     choisetTemperature = CounterTimer;
+     ChoisetTime = CounterTimer;
      OLED_Dispaly();
      tone(Buzzer, 400);
      delay(300);
