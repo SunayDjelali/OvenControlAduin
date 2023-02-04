@@ -7,11 +7,14 @@
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 
-//Define Display Seting
-#define OLED_RESET -1 
-#define SCREEN_ADDRESS 0x3C // OLED display Addres
+//Define SSD1309 ZJY_M242'OLED display connected using software SPI case
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
-#define SCREEN_HEIGHT 32  // OLED display height, in pixels
+#define SCREEN_HEIGHT 64  // OLED display height, in pixels
+#define OLED_SDA  9
+#define OLED_SCL 10
+#define OLED_DC  11
+#define OLED_CS  12
+#define OLED_RES 13
 
 //Set pin for relay in Array
 int RelayPins[] = { 22, 23, 24, 25 };
@@ -56,7 +59,8 @@ String strTime =        "Time       :";
 MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
 
 //Create object OLED display, SSD1306 chip
-Adafruit_SSD1306 display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
+ OLED_SDA, OLED_SCL, OLED_DC, OLED_RES, OLED_CS);
 
 //choise what type of timer use from Countimer Class
 Countimer tDown;
