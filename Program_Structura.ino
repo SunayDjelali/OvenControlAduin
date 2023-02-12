@@ -10,11 +10,11 @@
 //Define SSD1309 ZJY_M242'OLED display connected using software SPI case
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
-#define OLED_SDA  9
-#define OLED_SCL 10
-#define OLED_DC  11
-#define OLED_CS  12
-#define OLED_RES 13
+#define OLED_SDA 28
+#define OLED_SCL 29
+#define OLED_DC  30
+#define OLED_CS  31
+#define OLED_RES 32
 
 //Set pin for relay in Array
 int RelayPins[] = { 22, 23, 24, 25 };
@@ -91,12 +91,7 @@ void setup() {
     pinMode(TemperatureDT, INPUT);
     pinMode(TemperatureSW, INPUT);
 
-    Serial.begin(9600);
-    if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-      Serial.println(F("SSD1306 allocation failed"));
-      for (;;)
-        ;
-    }
+    
     display.clearDisplay();
     //variable = value from pin
     previousTimerCLK = digitalRead(TimerCLK);
