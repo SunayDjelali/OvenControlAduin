@@ -10,11 +10,16 @@
 //Define SSD1309 ZJY_M242'OLED display connected using software SPI case
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
+
 #define OLED_SDA 28
 #define OLED_SCL 29
 #define OLED_DC  30
 #define OLED_CS  31
 #define OLED_RES 32
+//Create object OLED display, SSD1306 chip
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
+ OLED_SDA, OLED_SCL, OLED_DC, OLED_RES, OLED_CS);
+
 
 //Set pin for relay in Array
 int RelayPins[] = { 22, 23, 24, 25 };
@@ -51,6 +56,7 @@ int choisetTemperature;    //Variable for Need temperature
 #define thermoCS  10 //Pin on the board CS
 #define thermoSCK  11 //Pin on the board SCK
 int currentTemperatureMAX6675;
+
 //define Text Variables
 String strTemperature = "Temperature:";
 String strTime =        "Time       :";
@@ -58,13 +64,30 @@ String strTime =        "Time       :";
 //Create object MAX6675 chip, K-type Termocuple 
 MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
 
-//Create object OLED display, SSD1306 chip
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
- OLED_SDA, OLED_SCL, OLED_DC, OLED_RES, OLED_CS);
 
 //choise what type of timer use from Countimer Class
 Countimer tDown;
 
+#define LOGO_HEIGHT   16
+#define LOGO_WIDTH    16
+static const unsigned char PROGMEM logo_bmp[] =
+{ 0b00000000, 0b11000000,
+  0b00000001, 0b11000000,
+  0b00000001, 0b11000000,
+  0b00000011, 0b11100000,
+  0b11110011, 0b11100000,
+  0b11111110, 0b11111000,
+  0b01111110, 0b11111111,
+  0b00110011, 0b10011111,
+  0b00011111, 0b11111100,
+  0b00001101, 0b01110000,
+  0b00011011, 0b10100000,
+  0b00111111, 0b11100000,
+  0b00111111, 0b11110000,
+  0b01111100, 0b11110000,
+  0b01110000, 0b01110000,
+  0b00000000, 0b00110000 };
+  
 void setup() {
     //Setings Here pins mode OUTPUT, INPUTS
 

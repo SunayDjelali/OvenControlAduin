@@ -1,7 +1,7 @@
 {
     "port": "COM3",
     "board": "arduino:avr:mega",
-    "sketch": "Program_Structura.ino",
+    "sketch": "OvenControlArduino.ino",
     "programmer": "avrispmkii",
     "configuration": "cpu=atmega2560",
     "output": ".\\build"
