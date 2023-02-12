@@ -1,24 +1,18 @@
+# 1 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 //Includes
-#include <arduino.h>
-#include <max6675.h>//forthermo cople
+# 3 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 2
+# 4 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 2
 
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_SSD1306.h>
-#include <Adafruit_GFX.h>
+# 6 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 2
+# 7 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 2
+# 8 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 2
+
 
 //Define SSD1309 ZJY_M242'OLED display connected using software SPI case
-#define SCREEN_WIDTH 128  // OLED display width, in pixels
-#define SCREEN_HEIGHT 64  // OLED display height, in pixels
-
-#define OLED_SDA 28
-#define OLED_SCL 29
-#define OLED_DC  30
-#define OLED_CS  31
-#define OLED_RES 32
+# 19 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 //Create object OLED display, SSD1306 chip
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
- OLED_SDA, OLED_SCL, OLED_DC, OLED_RES, OLED_CS);
+Adafruit_SSD1306 display(128 /* OLED display width, in pixels*/, 64 /* OLED display height, in pixels*/,
+ 28, 29, 30, 32, 31);
 
 
 //Set pin for relay in Array
@@ -28,49 +22,53 @@ int RelayPins[] = { 22, 23, 24, 25 };
 int InputPinsButton[] = { 4, 7};
 
 //Define Rotteri encoder set hronometer (Digital Pins)
-#define TimerCLK    2 //Pin on the boardclockwise detection
-#define TimerDT     3 //Pin on the board counter clockwise detection
-#define TimerSW     InputPinsButton[0] //Pin on the board Switch button
+
+
+
 int CounterTimer = 0; //Variable countering Timer
-int currentTimerCLK;  //Variable cureent countering  value Timer
+int currentTimerCLK; //Variable cureent countering  value Timer
 int previousTimerCLK; //Variable for previous value
 // ? Variable for choise timer ? what taype ? how many variables ? i don't know at this stage
 int ChoisetTime;
 
 //Define rottery encoder set temperature (Digital Pins)
-#define TemperatureCLK    5 //Pin on the board clockwise detection
-#define TemperatureDT     6 //Pin on the board counter clockwise detection
-#define TemperatureSW     InputPinsButton[1] //Pin on the board Switch button
+
+
+
 int CounterTemperature = 0; //Variable countering temperature
-int currentTemperatureCLK;  //Variable cureent countering  value temperature
+int currentTemperatureCLK; //Variable cureent countering  value temperature
 int previousTemperatureCLK; //Variable for previous value temperature
-int choisetTemperature;    //Variable for Need temperature
+int choisetTemperature; //Variable for Need temperature
 
 //define Pin for the Piezo buzer  
-#define Buzzer 8 // Pin on the board piezobuzer +
+
 //Increase or decrease setting value ie. step 
-#define step 10 
+
 
 //define Module Termocople connection pins (Digital Pins)
-#define thermoSO  9 //Pin on the board SO
-#define thermoCS  10 //Pin on the board CS
-#define thermoSCK  11 //Pin on the board SCK
+
+
+
 int currentTemperatureMAX6675;
 
 //define Text Variables
 String strTemperature = "Temperature:";
-String strTime =        "Time       :";
+String strTime = "Time       :";
 
 //Create object MAX6675 chip, K-type Termocuple 
-MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
+MAX6675 thermocouple(11 /*Pin on the board SCK*/, 10 /*Pin on the board CS*/, 9 /*Pin on the board SO*/);
 
 
 //choise what type of timer use from Countimer Class
 
 
-#define LOGO_HEIGHT   16
-#define LOGO_WIDTH    16
-static const unsigned char PROGMEM logo_bmp[] =
+
+
+static const unsigned char 
+# 73 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 3
+                          __attribute__((__progmem__)) 
+# 73 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+                                  logo_bmp[] =
 { 0b00000000, 0b11000000,
   0b00000001, 0b11000000,
   0b00000001, 0b11000000,
@@ -87,45 +85,53 @@ static const unsigned char PROGMEM logo_bmp[] =
   0b01111100, 0b11110000,
   0b01110000, 0b01110000,
   0b00000000, 0b00110000 };
-  
+
 void setup() {
    Serial.begin(9600);
    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-   if(!display.begin(SSD1306_SWITCHCAPVCC)) {
-    Serial.println(F("SSD1306 allocation failed"));
+   if(!display.begin(0x02 /*|< Gen. display voltage from 3.3V*/)) {
+    Serial.println((reinterpret_cast<const __FlashStringHelper *>(
+# 95 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 3
+                  (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 95 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+                  "SSD1306 allocation failed"
+# 95 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino" 3
+                  ); &__c[0];}))
+# 95 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+                  )));
     for(;;); // Don't proceed, loop forever
   }
     //Setings Here pins mode OUTPUT, INPUTS
 
     //OUTPUT General ordinary
     for (int i = 0; i < 4; i++) {
-      pinMode(RelayPins[i], OUTPUT);
-      digitalWrite(RelayPins[i], HIGH);
+      pinMode(RelayPins[i], 0x1);
+      digitalWrite(RelayPins[i], 0x1);
     }
     //INPUT Generaly General ordinary
     for (int i = 0; i < 2; i++)
     {
-      pinMode(InputPinsButton[i], INPUT);
+      pinMode(InputPinsButton[i], 0x0);
     }
     // Termocuple set pins Mode INPUT
-    pinMode(thermoSCK, INPUT);
-    pinMode(thermoSO, INPUT);
-    pinMode(thermoSCK, INPUT);
+    pinMode(11 /*Pin on the board SCK*/, 0x0);
+    pinMode(9 /*Pin on the board SO*/, 0x0);
+    pinMode(11 /*Pin on the board SCK*/, 0x0);
     //rottery encoder Timer set pins Mode INPUT
-    pinMode(TimerCLK,INPUT);
-    pinMode(TimerDT, INPUT);
-    pinMode(TimerSW, INPUT);
+    pinMode(2 /*Pin on the boardclockwise detection*/,0x0);
+    pinMode(3 /*Pin on the board counter clockwise detection*/, 0x0);
+    pinMode(InputPinsButton[0] /*Pin on the board Switch button*/, 0x0);
     //Rottery Encoder Temperatura set pins Mode INPUT
-    pinMode(TemperatureCLK, INPUT);
-    pinMode(TemperatureDT, INPUT);
-    pinMode(TemperatureSW, INPUT);
+    pinMode(5 /*Pin on the board clockwise detection*/, 0x0);
+    pinMode(6 /*Pin on the board counter clockwise detection*/, 0x0);
+    pinMode(InputPinsButton[1] /*Pin on the board Switch button*/, 0x0);
 
     display.clearDisplay();
     //variable = value from pin
-    previousTimerCLK = digitalRead(TimerCLK);
-    previousTemperatureCLK = digitalRead(TemperatureCLK);
+    previousTimerCLK = digitalRead(2 /*Pin on the boardclockwise detection*/);
+    previousTemperatureCLK = digitalRead(5 /*Pin on the board clockwise detection*/);
 
-  delay(500);  // wait for MAX chip to stabilize  
+  delay(500); // wait for MAX chip to stabilize  
 }
 
 void loop() {
@@ -134,36 +140,36 @@ void loop() {
     //funcHeating();
     //func3();
   //Code for Temperature Read parameters from Roterey encoder Temperature
-  if (digitalRead(TemperatureSW) == LOW) {
+  if (digitalRead(InputPinsButton[1] /*Pin on the board Switch button*/) == 0x0) {
     CounterTemperature = 0;
     choisetTemperature = CounterTemperature;
     OLED_Dispaly();
-    tone(Buzzer, 300);
+    tone(8 /* Pin on the board piezobuzer +*/, 300);
     delay(200);
-    noTone(Buzzer);
+    noTone(8 /* Pin on the board piezobuzer +*/);
   }
   //variable = value from pin
-  currentTemperatureCLK = digitalRead(TemperatureCLK);
+  currentTemperatureCLK = digitalRead(5 /*Pin on the board clockwise detection*/);
 
   if (currentTemperatureCLK != previousTemperatureCLK) {
-    if (digitalRead(TemperatureDT) != currentTemperatureCLK) {
-      CounterTemperature = (CounterTemperature + step);
+    if (digitalRead(6 /*Pin on the board counter clockwise detection*/) != currentTemperatureCLK) {
+      CounterTemperature = (CounterTemperature + 10);
       choisetTemperature = CounterTemperature;
-      tone(Buzzer, 600);
+      tone(8 /* Pin on the board piezobuzer +*/, 600);
       delay(200);
-      noTone(Buzzer);
+      noTone(8 /* Pin on the board piezobuzer +*/);
     } else {
       if (CounterTemperature > 0) {
-        CounterTemperature = (CounterTemperature - step);
+        CounterTemperature = (CounterTemperature - 10);
         choisetTemperature = CounterTemperature;
-        tone(Buzzer, 500);
+        tone(8 /* Pin on the board piezobuzer +*/, 500);
         delay(200);
-        noTone(Buzzer);
+        noTone(8 /* Pin on the board piezobuzer +*/);
       } else {
         CounterTemperature = 0;
-        tone(Buzzer, 1000);
+        tone(8 /* Pin on the board piezobuzer +*/, 1000);
         delay(500);
-        noTone(Buzzer);
+        noTone(8 /* Pin on the board piezobuzer +*/);
       }
     }
     OLED_Dispaly();
@@ -173,34 +179,34 @@ void loop() {
 
  //Code for Timer Read parameters from Roterey encoder Timer 
 
-     if (digitalRead(TimerSW) == LOW) {
+     if (digitalRead(InputPinsButton[0] /*Pin on the board Switch button*/) == 0x0) {
      CounterTimer = 0;
      ChoisetTime = CounterTimer;
      OLED_Dispaly();
-     tone(Buzzer, 400);
+     tone(8 /* Pin on the board piezobuzer +*/, 400);
      delay(300);
-     noTone(Buzzer);
+     noTone(8 /* Pin on the board piezobuzer +*/);
    }
-   currentTimerCLK = digitalRead(TimerCLK);
+   currentTimerCLK = digitalRead(2 /*Pin on the boardclockwise detection*/);
    if (currentTimerCLK != previousTimerCLK) {
-     if (digitalRead(TimerDT) != currentTimerCLK) {
-       CounterTimer = (CounterTimer + step);
+     if (digitalRead(3 /*Pin on the board counter clockwise detection*/) != currentTimerCLK) {
+       CounterTimer = (CounterTimer + 10);
        ChoisetTime = CounterTimer;
-       tone(Buzzer, 700);
+       tone(8 /* Pin on the board piezobuzer +*/, 700);
        delay(300);
-       noTone(Buzzer);
+       noTone(8 /* Pin on the board piezobuzer +*/);
      } else {
        if (CounterTimer > 0) {
-         CounterTimer = (CounterTimer - step);
+         CounterTimer = (CounterTimer - 10);
          ChoisetTime = CounterTimer;
-         tone(Buzzer, 600);
+         tone(8 /* Pin on the board piezobuzer +*/, 600);
          delay(300);
-         noTone(Buzzer);
+         noTone(8 /* Pin on the board piezobuzer +*/);
        } else {
          CounterTimer = 0;
-         tone(Buzzer, 900);
+         tone(8 /* Pin on the board piezobuzer +*/, 900);
          delay(500);
-         noTone(Buzzer);
+         noTone(8 /* Pin on the board piezobuzer +*/);
        }
      }
      OLED_Dispaly();
@@ -214,10 +220,10 @@ void loop() {
 
 void OLED_Dispaly() {
 
-  display.setTextColor(WHITE);
+  display.setTextColor(1 /*|< Draw 'on' pixels*/ /*|< Draw 'on' pixels*/);
   display.clearDisplay();//Clearing Display
   display.setTextSize(1);//Font Size
-  display.setTextColor(SSD1306_WHITE);
+  display.setTextColor(1 /*|< Draw 'on' pixels*/);
   display.setCursor(0, 0);//Sting posiston cursor
   display.print(strTemperature); //showing Text
   display.print(CounterTemperature);// Showing Variable Value
@@ -243,9 +249,9 @@ void funcHeating() {
   Serial.println(thermocouple.readCelsius());
   // if temprature goes above choiset C, turn the relay ON
     if (thermocouple.readCelsius() > choisetTemperature) {
-      digitalWrite(RelayPins[0], HIGH);  // set pin 22 LOW
+      digitalWrite(RelayPins[0], 0x1); // set pin 22 LOW
     } else {
-      digitalWrite(RelayPins[0], LOW);  // set pin 22 HIGH
+      digitalWrite(RelayPins[0], 0x0); // set pin 22 HIGH
     }
   // For the MAX6675 to update, you must delay AT LEAST 250ms between reads!
   delay(100);

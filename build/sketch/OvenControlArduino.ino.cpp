@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 //Includes
 #include <arduino.h>
 #include <max6675.h>//forthermo cople
@@ -88,6 +90,15 @@ static const unsigned char PROGMEM logo_bmp[] =
   0b01110000, 0b01110000,
   0b00000000, 0b00110000 };
   
+#line 91 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void setup();
+#line 131 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void loop();
+#line 215 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void OLED_Dispaly();
+#line 235 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void funcHeating();
+#line 91 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 void setup() {
    Serial.begin(9600);
    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -252,3 +263,4 @@ void funcHeating() {
 
 }
 //When time is end 00:00 turn off Oven
+
