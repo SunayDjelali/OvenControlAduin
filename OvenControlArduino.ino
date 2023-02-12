@@ -68,26 +68,6 @@ MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
 //choise what type of timer use from Countimer Class
 
 
-#define LOGO_HEIGHT   16
-#define LOGO_WIDTH    16
-static const unsigned char PROGMEM logo_bmp[] =
-{ 0b00000000, 0b11000000,
-  0b00000001, 0b11000000,
-  0b00000001, 0b11000000,
-  0b00000011, 0b11100000,
-  0b11110011, 0b11100000,
-  0b11111110, 0b11111000,
-  0b01111110, 0b11111111,
-  0b00110011, 0b10011111,
-  0b00011111, 0b11111100,
-  0b00001101, 0b01110000,
-  0b00011011, 0b10100000,
-  0b00111111, 0b11100000,
-  0b00111111, 0b11110000,
-  0b01111100, 0b11110000,
-  0b01110000, 0b01110000,
-  0b00000000, 0b00110000 };
-  
 void setup() {
    Serial.begin(9600);
    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -131,7 +111,7 @@ void setup() {
 void loop() {
   //here is main loping runining program go in everi functions one by one
     //funcTimer();
-    //funcHeating();
+    funcHeating();
     //func3();
   //Code for Temperature Read parameters from Roterey encoder Temperature
   if (digitalRead(TemperatureSW) == LOW) {
@@ -218,35 +198,42 @@ void OLED_Dispaly() {
   display.clearDisplay();//Clearing Display
   display.setTextSize(1);//Font Size
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 0);//Sting posiston cursor
+  display.setCursor(20, 0);//Sting posiston cursor
+  display.print("S E T U P");
+  display.setCursor(0, 10);
+  display.print("---------------------");
+  display.setCursor(0, 20);//Sting posiston cursor
   display.print(strTemperature); //showing Text
   display.print(CounterTemperature);// Showing Variable Value
-  display.setCursor(0, 10); //Sting posiston cursor
+  display.setCursor(0, 30); //Sting posiston cursor
   display.print("Variable   :"); //showing Text
   display.print(choisetTemperature); //Showing Variable Value
-  display.setCursor(0, 20); //Sting posiston cursor
+  display.setCursor(0, 40); //Sting posiston cursor
   display.print(strTime);
   display.print(ChoisetTime); //Showing Variable Value
+  display.setCursor(0, 50); //Sting posiston cursor
+  display.print(currentTemperatureMAX6675);
   display.display();
-  delay(500);
+  delay(100);
 
 }
 
 void funcHeating() {
   //functione when press second buttone set off teperature
  //Create Variable for temperatore store
-  currentTemperatureMAX6675 = (int)thermocouple.readCelsius();
+ delay(500);
+ int currentTemperatureMAX6675 = (int)thermocouple.readCelsius();
 //------------------------------------------------------------------
   //Degree Mark, length=1, position=3 (right)
   //display1.showString("\xB0", 1, 3);
   //display2.showString("\xB0", 1, 3);
-  Serial.println(thermocouple.readCelsius());
+  //Serial.println(thermocouple.readCelsius());
   // if temprature goes above choiset C, turn the relay ON
-    if (thermocouple.readCelsius() > choisetTemperature) {
-      digitalWrite(RelayPins[0], HIGH);  // set pin 22 LOW
-    } else {
-      digitalWrite(RelayPins[0], LOW);  // set pin 22 HIGH
-    }
+  //if (thermocouple.readCelsius() > choisetTemperature) {
+  // digitalWrite(RelayPins[0], HIGH);  // set pin 22 LOW
+  //} else {
+  //  digitalWrite(RelayPins[0], LOW);  // set pin 22 HIGH
+  // }
   // For the MAX6675 to update, you must delay AT LEAST 250ms between reads!
   delay(100);
 
