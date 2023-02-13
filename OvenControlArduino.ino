@@ -11,9 +11,9 @@
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
 
 #define OLED_SDA 28
-#define OLED_SCL 29
-#define OLED_DC  30
-#define OLED_CS  31
+#define OLED_SCL 30
+#define OLED_DC  24
+#define OLED_CS  22
 #define OLED_RES 32
 //Create object OLED display, SSD1306 chip
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
@@ -21,7 +21,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
 
 
 //Set pin for relay in Array
-int RelayPins[] = { 22, 23, 24, 25 };
+int RelayPins[] = { 23, 25, 27, 29 };
 
 //Set pin for button rottery encoder in Array (Digital Pins)
 int InputPinsButton[] = { 4, 7};
