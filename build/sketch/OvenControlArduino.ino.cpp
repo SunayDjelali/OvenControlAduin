@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 //Includes
 #include <arduino.h>
 #include <max6675.h>//forthermo cople
@@ -67,6 +69,15 @@ String strTime =        "Time       :";
 //choise what type of timer use from Countimer Class
 
 
+#line 70 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void setup();
+#line 107 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void loop();
+#line 188 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void OLED_Dispaly(void);
+#line 212 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
+void funcHeating(void);
+#line 70 "d:\\Documents\\Arduino\\OvenControlArduino\\OvenControlArduino.ino"
 void setup() {
    Serial.begin(9600);
    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -226,3 +237,4 @@ void funcHeating(void) {
 //OLED_Dispaly();
 }
 //When time is end 00:00 turn off Oven
+
