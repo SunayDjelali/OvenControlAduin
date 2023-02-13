@@ -1,7 +1,6 @@
 //Includes
 #include <arduino.h>
 #include <max6675.h>//forthermo cople
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
@@ -222,7 +221,7 @@ void funcHeating() {
   //functione when press second buttone set off teperature
  //Create Variable for temperatore store
  delay(500);
- int currentTemperatureMAX6675 = (int)thermocouple.readCelsius();
+ currentTemperatureMAX6675 = (int)thermocouple.readCelsius();
 //------------------------------------------------------------------
   //Degree Mark, length=1, position=3 (right)
   //display1.showString("\xB0", 1, 3);
