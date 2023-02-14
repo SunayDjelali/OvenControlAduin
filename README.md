@@ -2,13 +2,12 @@
 Controling Oven whit timer ConterDown when Teperature rich
 My Idea
 
-elements for use 
-
-Dysplay 1 pieces 
-https://www.amazon.co.uk/display-64×128-SSD1107-Vertical-arduino/dp/B0B1Q66TNG/ref=sr_1_1?crid=1MKFJUJVK3M5V&keywords=0.96+inch+OLED+display+64×128+LCD+module+SSD1107+LCD+0.96+"OLED+Vertical+screen+module+for+arduino&qid=1671221227&sprefix=0.96+inch+oled+display+64+128+lcd+module+ssd1107+lcd+0.96+oled+vertical+screen+module+for+arduino%2Caps%2C116&sr=8-1
-
+elements I'm use 
+-------------------------------------------------------------------------------------------------------------------
+2.42 inch OLED LCD Display Module SSD1309 128*64 on SPI interface 
+https://www.aliexpress.com/item/1005004638363229.html?spm=a2g0o.order_list.order_list_main.11.21ef1802pffWta
+-------------------------------------------------------------------------------------------------------------------------
 Rotary Encoder whit push button 2 pieces 
-https://www.amazon.co.uk/KY-040-Encoder-Development-Arduino-including/dp/B09726Y8RB/ref=sr_1_7?crid=3DZ9ZGK9810EL&keywords=Rotary+Encoder+Arduino&qid=1671221110&sprefix=rotary+encoder+arduino%2Caps%2C130&sr=8-7
 
 MAX6675 Module + K Type Thermocouple Thermocouple Sensor Temperature 0~1024℃ for Arduino
 https://www.amazon.com/SainSmart-MAX6675-Thermocouple-Temperature-0-1024℃/dp/B00PVTH4MW
