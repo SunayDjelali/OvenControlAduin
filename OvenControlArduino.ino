@@ -110,7 +110,7 @@ void setup() {
 void loop() {
   //here is main loping runining program go in everi functions one by one
   //funcTimer();
-  MainScreen();
+
 
   //Code for Temperature Read parameters from Roterey encoder Temperature
   if (digitalRead(TemperatureSW) == LOW) {
@@ -158,6 +158,7 @@ void loop() {
     OLED_Dispaly();
   }
   previousTimerCLK = currentTimerCLK;
+  MainScreen();
 }
 
 //Operating parameters setting screen
@@ -198,7 +199,7 @@ void MainScreen(void) {
   display.print(F(" C"));
   display.display();
   display.clearDisplay();
-  delay(1000);
+  delay(500);
   //OLED_Dispaly();
 }
 //When time is end 00:00 turn off Oven
