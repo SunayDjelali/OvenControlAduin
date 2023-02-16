@@ -162,7 +162,7 @@ void loop() {
 }
 
 //Operating parameters setting screen
-void OLED_Dispaly(void) {
+void OLED_Dispaly() {
   display.clearDisplay();  //Clearing Display
   display.setTextColor(WHITE);
   display.setTextSize(1);    //Font Size
@@ -186,7 +186,7 @@ void OLED_Dispaly(void) {
   delay(1000);
 }
 //MainScreen
-void MainScreen(void) {
+void MainScreen() {
   currentTemperatureMAX6675 = (int)thermocouple.readCelsius();
   //Serial.println(thermocouple.readCelsius());
   //Serial.println(currentTemperatureMAX6675);
